@@ -76,7 +76,7 @@ jobs:
 
   build-mac10-wheels:
 
-    runs-on: macos-11
+    runs-on: macos-latest
     strategy:
       matrix:
         python-version: [ 3.8, 3.9, "3.10", "3.11", "3.12" ]
@@ -105,9 +105,9 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         python -m pip install --upgrade pip twine wheel setuptools
-        python -m setup bdist_wheel --plat-name macosx-10.6-x86_64 --dist-dir dist
+        python -m setup bdist_wheel --plat-name macosx-14.0-x86_64 --dist-dir dist
 
-    - name: Upload MacOS 10.15 ${{ matrix.python-version }} Wheel
+    - name: Upload MacOS Intel ${{ matrix.python-version }} Wheel
       uses: actions/upload-artifact@v2
       with:
         name: apple10build${{ matrix.python-version }}
@@ -145,9 +145,9 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           python -m pip install --upgrade pip twine wheel setuptools
-          python -m setup bdist_wheel --plat-name macosx-13.0-arm64 --dist-dir dist
+          python -m setup bdist_wheel --plat-name macosx-14.0-arm64 --dist-dir dist
 
-      - name: Upload MacOS ${{ matrix.python-version }} Wheel
+      - name: Upload MacOS Apple Silicon ${{ matrix.python-version }} Wheel
         uses: actions/upload-artifact@v3
         with:
           name: apple10sbuild${{ matrix.python-version }}
